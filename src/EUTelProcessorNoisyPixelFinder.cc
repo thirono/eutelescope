@@ -366,7 +366,7 @@ void EUTelProcessorNoisyPixelFinder::check(LCEvent* /*event*/ )
 						EUTelGenericSparsePixel pixel;
 						pixel.setXCoord(xIt-hitVector->begin() + currentSensor->offX);
 						pixel.setYCoord(yIt - xIt->begin() + currentSensor->offY );
-						pixel.setSignal( ceil(100*fireFreq) );
+						pixel.setSignal( 100*fireFreq );
 						//writing out is done here
 						_hotPixelMap[it->first].push_back(pixel);
 					}
@@ -556,9 +556,9 @@ void EUTelProcessorNoisyPixelFinder::bookAndFillHistos()
 		tempHistoName = _firing1DHistoName + "_d" + to_string( *it );
 
 		//range for 1D firing histo
-		int nBin = 101;
-		double min = -0.5;
-		double max = 100.5;
+		int nBin = 501;
+		double min = -0.1;
+		double max = 100.1;
 
 		AIDA::IHistogram1D* firing1DHisto = AIDAProcessor::histogramFactory(this)->createHistogram1D( (basePath + tempHistoName).c_str(),nBin, min, max );
 		firing1DHisto->setTitle("Firing frequency distribution of hot pixels (in percent, rounded to the next integer);Firing Frequency (%); Count (#)");
